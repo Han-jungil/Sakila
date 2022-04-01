@@ -2,14 +2,15 @@
 <%@ page import="java.util.*" %>
 <%@ page import="dao.*" %>
 <%
-	StoreDao storeDao = new StoreDao();
-	List<Map<String, Object>> list = storeDao.selectStoreList();
+	StaffDao staffDao = new StaffDao();
+	List<Map<String, Object>> list = staffDao.selectStaffList();
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>storeList</title>
+<title>staffList</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -25,33 +26,37 @@
 		<div class="mt-4 p-5 bg-dark text-white rounded">
 			<h1>Store List</h1>
 		</div>
-		<table  class="table table-hover" border = "2">
-			<thead>
-				<th>storeId</th>
-				<th>staffId</th>
-				<th>staffname</th>
-				<th>addressId</th>
-				<th>staffAddress</th>
-				<th>lastUpdate</th>
-			</thead>
-			<tbody>
-				<% 
-				for(Map m : list) {	
-				%>
-					<tr>
-						 <td><%=m.get("storeId")%></td>
-						 <td><%=m.get("staffId")%></td>
-						 <td><%=m.get("staffname")%></td>
-						 <td><%=m.get("addressId")%></td>
-						 <td><%=m.get("staffAddress")%></td>
-						 <td><%=m.get("lastUpdate")%></td>
-					</tr>
-				<% 
-				}
-				%>
-			</tbody>
-		</table>
-		<!--  하단정보표시 -->
+	<table class="table table-hover" border = "2">
+		<thead>
+			<th>staffId</th>
+			<th>storeId</th>
+			<th>staffName</th>
+			<th>staffAddress</th>
+			<th>email</th>
+			<th>notes</th>
+			<th>username</th>
+			<th>lastUpdate</th>
+		</thead>
+		<tbody>
+			<% 
+			for(Map m : list) {	
+			%>
+				<tr>
+					 <td><%=m.get("staffId")%></td>
+					 <td><%=m.get("storeId")%></td>
+					 <td><%=m.get("staffName")%></td>
+					 <td><%=m.get("staffAddress")%></td>
+					 <td><%=m.get("email")%></td>
+					 <td><%=m.get("notes")%></td>
+					 <td><%=m.get("username")%></td>
+					 <td><%=m.get("lastUpdate")%></td>
+				</tr>
+			<% 
+			}
+			%>
+		</tbody>
+	</table>
+	<!--  하단정보표시 -->
 			<div class="bg-secondary">
 			<div>상호명 : GooDee Academy</div>
 			<div>전화 : 02-2108-5900</div>
@@ -60,7 +65,6 @@
 			<div>홈페이지 : <A href="https://www.gdu.co.kr">https://www.gdu.co.kr</A></div>
 			<div>주소 : 서울 금천구 가산디지털2로 115 대륭테크노타운 3차 1109호 71가산디지털단지역 5번 출구에서444m</div>
 			</div>
-	</div>
 </div>
 </body>
 </html>
