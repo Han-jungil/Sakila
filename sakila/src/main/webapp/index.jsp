@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>index</title>
 </head>
 <body>
-
+	<h1>Index</h1>
+	<ol>
+		<li><a href="<%=request.getContextPath()%>/storeList.jsp">Store List</a></li>
+		<li><a href="<%=request.getContextPath()%>/staffList.jsp">Staff List</a></li>
+	</ol>
 </body>
 </html>
