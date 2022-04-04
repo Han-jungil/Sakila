@@ -1,7 +1,9 @@
 package dao;
 
 import java.sql.*;
-import java.util.*; 
+import vo.*;
+import java.util.*;
+import util.DBUtil;
 
 public class StoreDao {
 	
@@ -12,13 +14,14 @@ public class StoreDao {
 		List<Map<String, Object>> list = new ArrayList<>();		//다형성
 		
 		// DB자원
-		Connection conn = null;
 		PreparedStatement stmt = null;
+		Connection conn = null;
 		ResultSet rs = null;
 		try {
 			// 마리아DB 접속
-			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sakila","root","java1234");
+			// Class.forName("org.mariadb.jdbc.Driver");
+			// conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sakila","root","java1234");
+			conn = DBUtil.getConnection();
 			// SQL문
 			String sql = "SELECT \r\n"
 					+ "	s1.store_id storeId,\r\n"
