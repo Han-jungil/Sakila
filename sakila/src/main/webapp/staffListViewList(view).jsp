@@ -15,7 +15,6 @@
 	
 	StaffListViewDao staffListViewDao = new StaffListViewDao();
 	ArrayList<StaffListView> list = staffListViewDao.selectStaffListViewListByPage(beginRow, rowPerPage);
-	
 	// 전체 행의수
 	int totalCount = staffListViewDao.selectStaffListViewListTotalRow();
 	

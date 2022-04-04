@@ -28,7 +28,7 @@ public class CustomerListDao {
 				c.setName(rs.getString("Name"));
 				c.setAddress(rs.getString("address"));
 				c.setZipCode(rs.getString("zipCode"));
-				c.setPhone(rs.getString("phone"));
+				c.setPhone(rs.getLong("phone"));
 				c.setCity(rs.getString("city"));
 				c.setCountry(rs.getString("city"));
 				c.setNotes(rs.getString("notes"));

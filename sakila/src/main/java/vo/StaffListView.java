@@ -5,7 +5,7 @@ public class StaffListView {
 	private String name;
 	private String address;
 	private String zipCode;
-	private String phone;
+	private long phone;
 	private String city;
 	private String country;
 	private int sid;
@@ -38,10 +38,10 @@ public class StaffListView {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	public String getPhone() {
+	public long getPhone() {
 		return phone;
 	}
-	public void setPhone(String phone) {
+	public void setPhone(long phone) {
 		this.phone = phone;
 	}
 	public String getCity() {
