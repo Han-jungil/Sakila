@@ -19,7 +19,7 @@
 	<div class= "row">
 		<div class= "col-sm-3">
 			<div class=" mt-5 p-5 bg-dark text-white rounded">
-				<h1>&nbsp; Index</h1>
+				<h1>Index</h1>
 		</div>
 		</div>
 		<table class=" col-sm-7 table table-hover">
@@ -33,6 +33,7 @@
 					<ol>
 						<li><a href="<%=request.getContextPath()%>/storeList.jsp">Store List</a></li>
 						<li><a href="<%=request.getContextPath()%>/staffList.jsp">Staff List</a></li>
+						<li><a href="<%=request.getContextPath()%>/actorInfoList.jsp">ActorInfoL List</a></li>
 					</ol>
 				</td>
 			</tbody>
