@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-					
-		
 					<ol>
 						<li><a href="<%=request.getContextPath()%>/storeList.jsp">Store List</a></li>
 						<li><a href="<%=request.getContextPath()%>/staffList.jsp">Staff List</a></li>
