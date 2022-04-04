@@ -30,11 +30,7 @@
 			</thead>
 			<tbody>
 				<td>
-					<ol>
-						<li><a href="<%=request.getContextPath()%>/storeList.jsp">Store List</a></li>
-						<li><a href="<%=request.getContextPath()%>/staffList.jsp">Staff List</a></li>
-						<li><a href="<%=request.getContextPath()%>/actorInfoList.jsp">ActorInfoL List</a></li>
-					</ol>
+					<jsp:include page="./inc/indexMenu.jsp"></jsp:include>
 				</td>
 			</tbody>
 		</table>
