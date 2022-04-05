@@ -5,9 +5,9 @@ import java.util.*;
 import vo.*;
 import util.DBUtil;
 
-
 public class RewardsReportDao {
 	public Map<String, Object> rewardsReportCall(int minMonthlyPurchases,double minDollarAmountPurchased) {
+		// 자원준비
 		Map<String, Object> map = new HashMap<String, Object>();
 		Connection conn = null;
 		// PreparedStatement : 쿼리를 실행
@@ -18,7 +18,9 @@ public class RewardsReportDao {
 		List<Customer> list = new ArrayList<>();
 		// select count(customer_id) ....
 		Integer count = 0;
+		// 디비 접속
 		conn = DBUtil.getConnection();
+		// SQL문 실행
 		try {
 			stmt = conn.prepareCall("{call rewards_report(?, ?, ?)}");
 			stmt.setInt(1, minMonthlyPurchases);
@@ -41,10 +43,16 @@ public class RewardsReportDao {
 			count = stmt.getInt(3); // 프로시저 3번째 out변수 값
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {	// 자원 반납
+				rs.close(); stmt.close(); conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		map.put("customer", list);
 		map.put("count", count);
-		return map;
+		return map;	// 값 리턴
 	}
 	// test
 	public static void main(String[] args) {

@@ -3,15 +3,12 @@
 <%@ page import="vo.*" %>
 <%@ page import="dao.*" %>
 <%
+	// 변수 선언
 	int filmId = 0;
 	int storeId = 0;
 	int count = 0;
-	Map<String, Object> map = new HashMap<String, Object>();
 	
-	if(request.getParameter("filmId") == "" && request.getParameter("storeId") == "") {
-		filmId  = 0;
-		storeId = 0;
-	}
+	// 요청값
 	if((request.getParameter("filmId")!=null && request.getParameter("filmId")!="") && (request.getParameter("storeId")!=null && request.getParameter("storeId")!="")){
 		filmId = Integer.parseInt(request.getParameter("filmId"));
 		System.out.println(filmId+"<--filmId");
@@ -19,15 +16,13 @@
 		System.out.println(storeId+"<--storeId");
 	}
 
-	if(filmId != 0 || storeId != 0) {
-		// 비지니스 로기직(모델계층)
-		FilmNotInStockDao filmNotInStockDao = new FilmNotInStockDao();
-		map = filmNotInStockDao.filmNotInStockCall(filmId, storeId);
+	// 비지니스 로기직(모델계층)
+	FilmNotInStockDao filmNotInStockDao = new FilmNotInStockDao();
+	Map<String, Object> map = filmNotInStockDao.filmNotInStockCall(filmId, storeId);
 		
-		// 카운터 
-		List<Integer> list = (List<Integer>)(map.get("list"));
-		count = (Integer)(map.get("count"));
-	}
+	// 카운터 
+	List<Integer> list = (List<Integer>)(map.get("list"));
+	count = (Integer)(map.get("count"));
 %>
 <!DOCTYPE html>
 <html>
@@ -50,7 +45,7 @@
 			<h1>filmNotInStock List(procedure)</h1>
 		</div>
 	<form method="post" action="<%=request.getContextPath()%>/procedure/filmNotInStockList.jsp">
-		<button type="submit" class="btn-dark">입력</button>
+		<button type="submit" class="btn-dark">조회</button>
 		<table border="1" class="table">
 			<tr>
 				<td>filmId</td>
@@ -62,6 +57,7 @@
 	</form>
 	<table class="table table-hover" border = "2">
 		<thead>
+			<h5><%=filmId%>번 영화는 <%=storeId%>번 가게에 <%=count%>개 대여</h5>
 			<th>filmId</th>
 			<th>storeId</th>
 			<th>count</th>
@@ -71,7 +67,16 @@
 					 <td><%=filmId%></td>
 					 <td><%=storeId%></td>
 					 <td><%=count%></td>
-				</tr>
+					<h5>inventoryId :
+					 <%		
+					 for(int i : list) {
+					 %>
+					 	<%=i%>,
+					 <%
+					 		}
+					 %>
+					 </h5>
+			</tr>
 
 		</tbody>
 	</table>

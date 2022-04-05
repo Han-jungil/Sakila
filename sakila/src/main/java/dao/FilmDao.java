@@ -14,6 +14,7 @@ import util.DBUtil;
 
 public class FilmDao {
 	public Map<String, Object> filmInStockCall(int filmId, int storeId) {
+		// 자원준비
 		Map<String, Object> map = new HashMap<String, Object>();
 		Connection conn = null;
 		// PreparedStatement : 쿼리를 실행
@@ -24,7 +25,9 @@ public class FilmDao {
 		List<Integer> list = new ArrayList<>();
 		// select count(inventroy_id) ....
 		Integer count = 0;
+		// 디비 접속
 		conn = DBUtil.getConnection();
+		// SQL문 실행
 		try {
 			stmt = conn.prepareCall("{call film_in_stock(?, ?, ?)}");
 			stmt.setInt(1, filmId);
@@ -38,7 +41,7 @@ public class FilmDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
+			try {	// 자원 반납
 				rs.close(); stmt.close(); conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -46,7 +49,7 @@ public class FilmDao {
 		}
 		map.put("list", list);
 		map.put("count", count);
-		return map;
+		return map; // 값 리턴
 	}
 	
 	// test

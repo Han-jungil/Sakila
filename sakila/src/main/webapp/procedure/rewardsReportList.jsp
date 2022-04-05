@@ -3,11 +3,12 @@
 <%@ page import="vo.*" %>
 <%@ page import="dao.*" %>
 <%
+	// 변수 선언
 	int minMonthlyPurchases = 1;
 	double minDollarAmountPurchased = 1;
 	int count = 0;
 	
-	
+	// 요청값
 	if((request.getParameter("minMonthlyPurchases")!=null && request.getParameter("minMonthlyPurchases")!="") && (request.getParameter("minDollarAmountPurchased")!=null && request.getParameter("minDollarAmountPurchased")!="")){
 		minMonthlyPurchases = Integer.parseInt(request.getParameter("minMonthlyPurchases"));
 		System.out.println(minMonthlyPurchases+"<--minMonthlyPurchases");
@@ -19,7 +20,7 @@
 	RewardsReportDao rewardsReportDao = new RewardsReportDao();
 	Map<String,Object> map = rewardsReportDao.rewardsReportCall(minMonthlyPurchases, minDollarAmountPurchased);
 	
-	// count
+	// 카운터
 	count = (Integer)map.get("count");
 	List<Customer> list = (List<Customer>)map.get("customer");
 	
@@ -44,6 +45,17 @@
 		<div class="mt-4 p-5 bg-dark text-white rounded">
 			<h1>rewardsReport List(procedure)</h1>
 		</div>
+	<form method="post" action="<%=request.getContextPath()%>/procedure/rewardsReportList.jsp">
+	<button type="submit" class="btn-dark">조회</button>
+	<table border="1" class="table">
+		<tr>
+			<td>minMonthlyPurchases</td>
+			<td><input type="number" name="minMonthlyPurchases" class="form-control"></td>
+			<td>minDollarAmountPurchased</td>
+			<td><input type="number" name="minDollarAmountPurchased" class="form-control"></td>
+		</tr>
+		</table>
+	</form>
 	<table class="table table-hover col-sm-11">
 		<thead>
 			<th>customerId</th>
@@ -56,13 +68,14 @@
 			<th>lastupDate</th>
 		</thead>
 		<tbody>
+		<h5><%=minMonthlyPurchases%>번 사신 손님들의 <%=minDollarAmountPurchased%>금액보다 산게 <%=count%>번 정도 있음</h5>
 		<%
 			for(Customer c : list) {
 		%>
 			<tr>
 				<td><%=c.getCustomerId()%></td>
 				<td><%=c.getStoreId()%></td>
-				<td><%=c.getFirstName()%> + <%=c.getLastName()%></td>
+				<td><%=c.getFirstName()%> <%=c.getLastName()%></td>
 				<td><%=c.getEmail()%></td>
 				<td><%=c.getAddressId()%></td>
 				<td><%=c.getActive()%></td>

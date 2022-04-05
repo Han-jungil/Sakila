@@ -3,14 +3,12 @@
 <%@ page import="vo.*" %>
 <%@ page import="dao.*" %>
 <%
+	// 변수 선언
 	int filmId = 0;
 	int storeId = 0;
 	int count = 0;
 	
-	if(request.getParameter("filmId") == "" && request.getParameter("storeId") == "") {
-		filmId  = 0;
-		storeId = 0;
-	}
+	// 요청값
 	if((request.getParameter("filmId")!=null && request.getParameter("filmId")!="") && (request.getParameter("storeId")!=null && request.getParameter("storeId")!="")){
 		filmId = Integer.parseInt(request.getParameter("filmId"));
 		System.out.println(filmId+"<--filmId");
@@ -18,13 +16,14 @@
 		System.out.println(storeId+"<--storeId");
 	}
 	
-	if(filmId != 0 || storeId != 0) {
-		// 비지니스 로기직(모델계층)
-		FilmDao filmDao = new FilmDao();
-		Map<String,Object> map = filmDao.filmInStockCall(filmId, storeId);
-		List<Integer> list = (List<Integer>)map.get("list");
-		count = (Integer)map.get("count");
-	}
+	// 비지니스 로기직(모델계층)
+	FilmDao filmDao = new FilmDao();
+	Map<String,Object> map = filmDao.filmInStockCall(filmId, storeId);
+	
+	// 카운터 
+	List<Integer> list = (List<Integer>)map.get("list");
+	count = (Integer)map.get("count");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -47,7 +46,7 @@
 			<h1>filmInStock List(procedure)</h1>
 		</div>
 	<form method="post" action="<%=request.getContextPath()%>/procedure/filmInStockList.jsp">
-		<button type="submit" class="btn-dark">입력</button>
+		<button type="submit" class="btn-dark">조회</button>
 		<table border="1" class="table">
 			<tr>
 				<td>filmId</td>
@@ -59,6 +58,7 @@
 	</form>
 	<table class="table table-hover" border = "2">
 		<thead>
+			<h5><%=filmId%>번 영화는 <%=storeId%>번 가게에 <%=count%>개 재고</h5>
 			<th>filmId</th>
 			<th>storeId</th>
 			<th>count</th>
@@ -68,6 +68,15 @@
 				 <td><%=filmId%></td>
 				 <td><%=storeId%></td>
 				 <td><%=count%></td>
+				 <h5>inventoryId :
+				 <%		
+				 for(int i : list) {
+				 %>
+				 	<%=i%>,
+				 <%
+				}
+				 %>
+				 </h5>
 			</tr>
 
 
