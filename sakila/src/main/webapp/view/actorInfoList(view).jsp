@@ -13,11 +13,11 @@
 	int rowPerPage = 5;
 	int beginRow = (currentPage-1)*rowPerPage; // 현재페이지가 변경되면 beginRow도 변경된다. -> 가져오는 데이터 변경된다.
 	
-	SalesByFilmCategoryDao salesByFilmCategoryDao = new SalesByFilmCategoryDao();
-	ArrayList<SalesByFilmCategory> list = salesByFilmCategoryDao.selectSalesByFilmCategoryListByPage(beginRow, rowPerPage);
+	ActorInfoDao actorInfoDao = new ActorInfoDao();
+	ArrayList<ActorInfo> list = actorInfoDao.selectActorInfoListByPage(beginRow, rowPerPage);
 	
 	// 전체 행의수
-	int totalCount = salesByFilmCategoryDao.selectSalesByFilmCategoryListTotalRow();
+	int totalCount = actorInfoDao.selectActoInfoTotalRow();
 	
 	// 마지막페이지 설정
 	int lastPage = 0;
@@ -27,7 +27,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SalesByFilmCategoryList(view)</title>
+<title>actorInfoList(view)</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -41,20 +41,22 @@
 			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/index.jsp">index</a>
 		</div>
 		<div class="mt-4 p-5 bg-dark text-white rounded">
-			<h1>SalesByFilmCategoryList(view)</h1>
+			<h1>ActorInfo List(view)</h1>
 		</div>
 	<table class="table table-hover" border = "2">
 		<thead>
-			<th>category</th>
-			<th>totalSales</th>
+			<th>actorId</th>
+			<th>fullName</th>
+			<th>filmInfo</th>
 		</thead>
 		<tbody>
 			<% 
-			for(SalesByFilmCategory a : list) {	
+			for(ActorInfo a : list) {	
 			%>
 				<tr>
-					 <td><%=a.getCategory()%></td>
-					 <td><%=a.getTotalSales()%></td>
+					 <td><%=a.getActorId()%></td>
+					 <td><%=a.getFirstName()%> + <%=a.getLastName()%></td>
+					 <td><%=a.getFilmInfo()%></td>
 				</tr>
 			<% 
 			}
@@ -65,12 +67,12 @@
 	<%
 		if(currentPage > 1) { // 현재페이지가 1이면 이전페이지가 존재해서는 안된다.
 	%>
-			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/salesByFilmCategoryList(view).jsp?currentPage=<%=currentPage-1%>">이전</a>&nbsp;&nbsp;&nbsp;
+			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/actorInfoList(view).jsp?currentPage=<%=currentPage-1%>">이전</a>&nbsp;&nbsp;&nbsp;
 	<%	
 		}
 		if(currentPage < lastPage) { // 마지막페이지가 있다면 
 	%>
-		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/salesByFilmCategoryList(view).jsp?currentPage=<%=currentPage+1%>">다음</a>&nbsp;&nbsp;&nbsp;
+		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/actorInfoList(view).jsp?currentPage=<%=currentPage+1%>">다음</a>&nbsp;&nbsp;&nbsp;
 	<%		
 		}
 	%>

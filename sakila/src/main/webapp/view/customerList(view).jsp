@@ -13,11 +13,11 @@
 	int rowPerPage = 5;
 	int beginRow = (currentPage-1)*rowPerPage; // 현재페이지가 변경되면 beginRow도 변경된다. -> 가져오는 데이터 변경된다.
 	
-	SalesByStoreDao salesByStoreDao = new SalesByStoreDao();
-	ArrayList<SalesByStore> list = salesByStoreDao.selectSalesByStoreListByPage(beginRow, rowPerPage);
+	CustomerListDao customerListDao = new CustomerListDao();
+	ArrayList<CustomerList> list = customerListDao.selectCustomerListListByPage(beginRow, rowPerPage);
 	
 	// 전체 행의수
-	int totalCount = salesByStoreDao.selectSalesByStoreListTotalRow();
+	int totalCount = customerListDao.selectCustomerListTotalRow();
 	
 	// 마지막페이지 설정
 	int lastPage = 0;
@@ -27,7 +27,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SalesByStoreList(view)</title>
+<title>customerList(view)</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -41,22 +41,34 @@
 			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/index.jsp">index</a>
 		</div>
 		<div class="mt-4 p-5 bg-dark text-white rounded">
-			<h1>SalesByStoreList(view)</h1>
+			<h1>CustomerList(view)</h1>
 		</div>
 	<table class="table table-hover" border = "2">
 		<thead>
-			<th>store</th>
-			<th>manager</th>
-			<th>totalSales</th>
+			<th>ID</th>
+			<th>name</th>
+			<th>address</th>
+			<th>zipCode</th>
+			<th>phone</th>
+			<th>city</th>
+			<th>country</th>
+			<th>notes</th>
+			<th>SID</th>
 		</thead>
 		<tbody>
 			<% 
-			for(SalesByStore a : list) {	
+			for(CustomerList a : list) {	
 			%>
 				<tr>
-					 <td><%=a.getStore()%></td>
-					 <td><%=a.getManager()%></td>
-					 <td><%=a.getTotalSales()%></td>
+					 <td><%=a.getCostomerListId()%></td>
+					 <td><%=a.getName()%></td>
+					 <td><%=a.getAddress()%></td>
+					 <td><%=a.getZipCode()%></td>
+					 <td><%=a.getPhone()%></td>
+					 <td><%=a.getCity()%></td>
+					 <td><%=a.getCountry()%></td>
+					 <td><%=a.getNotes()%></td>
+					 <td><%=a.getSid()%></td>
 				</tr>
 			<% 
 			}
@@ -67,12 +79,12 @@
 	<%
 		if(currentPage > 1) { // 현재페이지가 1이면 이전페이지가 존재해서는 안된다.
 	%>
-			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/salesByStoreList(view).jsp?currentPage=<%=currentPage-1%>">이전</a>&nbsp;&nbsp;&nbsp;
+			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/customerList(view).jsp?currentPage=<%=currentPage-1%>">이전</a>&nbsp;&nbsp;&nbsp;
 	<%	
 		}
 		if(currentPage < lastPage) { // 마지막페이지가 있다면 
 	%>
-		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/salesByStoreList(view).jsp?currentPage=<%=currentPage+1%>">다음</a>&nbsp;&nbsp;&nbsp;
+		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/customerList(view).jsp?currentPage=<%=currentPage+1%>">다음</a>&nbsp;&nbsp;&nbsp;
 	<%		
 		}
 	%>

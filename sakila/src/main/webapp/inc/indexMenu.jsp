@@ -1,12 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+						<h4>-Table-</h4>
 					<ol>
 						<li><a href="<%=request.getContextPath()%>/storeList.jsp">Store List</a></li>
 						<li><a href="<%=request.getContextPath()%>/staffList.jsp">Staff List</a></li>
-						<li><a href="<%=request.getContextPath()%>/actorInfoList(view).jsp">ActorInfo List(View)</a></li>
-						<li><a href="<%=request.getContextPath()%>/customerList(view).jsp">Customer List(View)</a></li>
-						<li><a href="<%=request.getContextPath()%>/filmList(view).jsp">Film List(View)</a></li>
-						<li><a href="<%=request.getContextPath()%>/niceButSlowerFilmList(view).jsp">NicerButSlowerFilm List(View)</a></li>
-						<li><a href="<%=request.getContextPath()%>/salesByFilmCategoryList(view).jsp">SalesByFilmCategory List(View)</a></li>
-						<li><a href="<%=request.getContextPath()%>/salesByStoreList(view).jsp">SalesByStore List(View)</a></li>
-						<li><a href="<%=request.getContextPath()%>/staffListViewList(view).jsp">Staff List(View)</a></li>
+					</ol>
+						<h4>-View-</h4>
+					<ol>	
+						<li><a href="<%=request.getContextPath()%>/view/actorInfoList(view).jsp">ActorInfo List(View)</a></li>
+						<li><a href="<%=request.getContextPath()%>/view/customerList(view).jsp">Customer List(View)</a></li>
+						<li><a href="<%=request.getContextPath()%>/view/filmList(view).jsp">Film List(View)</a></li>
+						<li><a href="<%=request.getContextPath()%>/view/niceButSlowerFilmList(view).jsp">NicerButSlowerFilm List(View)</a></li>
+						<li><a href="<%=request.getContextPath()%>/view/salesByFilmCategoryList(view).jsp">SalesByFilmCategory List(View)</a></li>
+						<li><a href="<%=request.getContextPath()%>/view/salesByStoreList(view).jsp">SalesByStore List(View)</a></li>
+						<li><a href="<%=request.getContextPath()%>/view/staffListViewList(view).jsp">Staff List(View)</a></li>
+					</ol>
+						<h4>-Procedure-</h4>
+					<ol>
+						<li><a href="<%=request.getContextPath()%>/procedure/filmInStockList.jsp">FilmInStockList</a></li>
+						<li><a href="<%=request.getContextPath()%>/procedure/filmNotInStockList.jsp">FilmNotInStockList</a></li>
+						<li><a href="<%=request.getContextPath()%>/procedure/rewardsReportList.jsp">RewardsReportList</a></li>
 					</ol>

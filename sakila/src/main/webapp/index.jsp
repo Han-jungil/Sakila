@@ -12,28 +12,43 @@
 	<!-- 상단메뉴 -->
 	<div class= "row">
 		<div class="col-sm-10 bg-secondary text-white">
-			<tr>[스마트혼합]공공데이터 융합자바/스프링 개발자 양성과정(19회차) &nbsp&nbsp Teacher : P.SungHwan &nbsp&nbsp Manager : L.SunMin</tr>
+			<tr>[스마트혼합]공공데이터 융합자바/스프링 개발자 양성과정(19회차) &nbsp;&nbsp; Teacher : P.SungHwan &nbsp;&nbsp; Manager : L.SunMin</tr>
 		</div>
 	</div>
 	<!-- 좌측+메인 -->
 	<div class= "row">
 		<div class= "col-sm-3">
 			<div class=" mt-5 p-5 bg-dark text-white rounded">
-				<h1>Index</h1>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<h1>&nbsp;&nbsp;Index</h1>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>
+				<div>&nbsp;</div>	
 		</div>
 		</div>
-		<table class=" col-sm-7 table table-hover">
-			<thead>
-				<tr>	
-					<th>목록</th>
-				</tr>
-			</thead>
-			<tbody>
-				<td>
-					<jsp:include page="./inc/indexMenu.jsp"></jsp:include>
-				</td>
-			</tbody>
-		</table>
+		<div class="col-sm-7">
+			<table class="table table-hover">
+				<thead>
+					<tr>	
+						<th>목록</th>
+					</tr>
+				</thead>
+				<tbody>
+					<td>
+						<jsp:include page="./inc/indexMenu.jsp"></jsp:include>
+					</td>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	<!--  하단정보표시 -->
 			<div class="col-sm-10 bg-secondary">
