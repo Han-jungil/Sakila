@@ -288,6 +288,7 @@ public class FilmDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
+		int count = -1;
 		// DB접속
 		conn = DBUtil.getConnection();
 		String sql ="SELECT DISTINCT price FROM film_list ORDER BY price";
@@ -309,20 +310,211 @@ public class FilmDao {
 		}
 		return list;
 	}
-	// 총합 구하기 및 라스트 페이지 설정
-		public int selectFilmListSearchTotalRow() {
-			int row = 0;
+	// filmSearchAction 총합 구하기 및 라스트 페이지 설정
+		public int FilmListSearchTotalRow(String category, String rating, double price, int length, String title, String actor) {
+			int row = -1;
 			Connection conn = null;
 			PreparedStatement  stmt = null;
 			ResultSet rs = null;
 			conn = DBUtil.getConnection();
-			String sql = "SELECT COUNT(*) cnt FROM film_list";
+			String sql = "";
 			try {
-				stmt = conn.prepareStatement(sql);
-				System.out.println("sql selectFilmListSearchTotalRow : " + stmt);	//디버깅
+				// 동적쿼리
+				sql = "SELECT count(*) cnt FROM film_list WHERE title LIKE ? AND actors LIKE ?";
+				if(price==-1 && length==-1 && rating.equals("")) {
+					if(!category.equals("")) {
+						sql += " AND category LIKE ?";
+						stmt = conn.prepareStatement(sql);
+						stmt.setString(1, "%"+title+"%"); 
+						stmt.setString(2, "%"+actor+"%");
+						stmt.setString(3, "%"+category+"%");
+					} else {
+						sql += "";
+						stmt = conn.prepareStatement(sql);
+						stmt.setString(1, "%"+title+"%"); 
+						stmt.setString(2, "%"+actor+"%");
+					}
+				} else if(price==-1 && length!=-1 && rating.equals("")) {
+					if(length == 0) {
+						if(!category.equals("")) {
+							sql += " AND category LIKE ? AND length<60";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+							stmt.setString(3, "%"+category+"%");
+						} else {
+							sql += " AND length<60";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+						}
+					} else if(length == 1) {
+						if(!category.equals("")) {
+							sql += " AND category LIKE ? AND length>=60";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+							stmt.setString(3, "%"+category+"%");
+						} else {
+							sql += " AND length>=60";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+						}
+					}
+				} else if(rating.equals("") && price!=-1 && length==-1) {
+					if(!category.equals("")) {
+						sql += " AND category LIKE ? AND price=?";
+						stmt = conn.prepareStatement(sql);
+						stmt.setString(1, "%"+title+"%");
+						stmt.setString(2, "%"+actor+"%");
+						stmt.setString(3, "%"+category+"%");
+						stmt.setDouble(4, price);
+					} else {
+						sql += " AND price=?";
+						stmt = conn.prepareStatement(sql);
+						stmt.setString(1, "%"+title+"%");
+						stmt.setString(2, "%"+actor+"%");
+						stmt.setDouble(3, price);
+				}
+				} else if(!rating.equals("") && price==-1 && length==-1) {
+					if(!category.equals("")) {
+						sql += " AND category LIKE ? AND rating=?";
+						stmt = conn.prepareStatement(sql);
+						stmt.setString(1, "%"+title+"%");
+						stmt.setString(2, "%"+actor+"%");
+						stmt.setString(3, "%"+category+"%");
+						stmt.setString(4, rating);
+					} else {
+						sql += " AND rating=?";
+						stmt = conn.prepareStatement(sql);
+						stmt.setString(1, "%"+title+"%");
+						stmt.setString(2, "%"+actor+"%");
+						stmt.setString(3, rating);
+					}
+				} else if (price!=-1 && length!=-1 && rating.equals("")) {
+					if(length == 0) {
+						if(!category.equals("")) {
+							sql += " AND category LIKE ? AND length<60 AND price=?";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+							stmt.setString(3, "%"+category+"%");
+							stmt.setDouble(4, price);
+							
+						} else {
+							sql += " AND length<60 AND price=?";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+							stmt.setDouble(3, price);
+						}
+					} else if(length == 1) {
+						if(!category.equals("")) {
+							sql += " AND category LIKE ? AND length>=60 AND price=?";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+							stmt.setString(3, "%"+category+"%");
+							stmt.setDouble(4, price);
+						} else {
+							sql += " AND length>=60 AND price=?";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+							stmt.setDouble(3, price);
+						}
+					}
+				} else if (price==-1 && length!=-1 && !rating.equals("")) {
+					if(length == 0) {
+						if(!category.equals("")) {
+						sql += " AND category LIKE ? AND length<60 AND rating=?";
+						stmt = conn.prepareStatement(sql);
+						stmt.setString(1, "%"+title+"%");
+						stmt.setString(2, "%"+actor+"%");
+						stmt.setString(3, "%"+category+"%");
+						stmt.setString(4, rating);
+						} else {
+							sql += " AND length<60 AND rating=?";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+							stmt.setString(3, rating);
+						}
+					} else if(length == 1) {
+						if(!category.equals("")) {
+						sql += " AND category LIKE ? AND length>=60 AND rating=?";
+						stmt = conn.prepareStatement(sql);
+						stmt.setString(1, "%"+title+"%");
+						stmt.setString(2, "%"+actor+"%");
+						stmt.setString(3, "%"+category+"%");
+						stmt.setString(4, rating);
+						} else {
+							sql += " AND length>=60 AND rating=?";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+							stmt.setString(3, rating);
+						}
+					}
+				} else if (price!=-1 && length==-1 && !rating.equals("")) {
+					if(!category.equals("")) {
+						sql += " AND category LIKE ? AND rating=? AND price=?";
+						stmt = conn.prepareStatement(sql);
+						stmt.setString(1, "%"+title+"%");
+						stmt.setString(2, "%"+actor+"%");
+						stmt.setString(3, "%"+category+"%");
+						stmt.setString(4, rating);
+						stmt.setDouble(5, price);
+					} else {
+						sql += " AND rating=? AND price= ?";
+						stmt = conn.prepareStatement(sql);
+						stmt.setString(1, "%"+title+"%");
+						stmt.setString(2, "%"+actor+"%");
+						stmt.setString(3, rating);
+						stmt.setDouble(4, price);
+					}
+					
+				} else if (price!=-1 && length!=-1 && !rating.equals("")) {
+					if(length == 0) {
+						if(!category.equals("")) {
+							sql += " AND category LIKE ? AND length<60 AND rating=? AND price=?";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+							stmt.setString(3, "%"+category+"%");
+							stmt.setString(4, rating);
+							stmt.setDouble(5, price);
+						} else {
+							sql += " AND length<60 AND rating=? AND price=?";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+							stmt.setString(3, rating);
+							stmt.setDouble(4, price);
+						}
+					} else if(length == 1) {
+						if(!category.equals("")) {
+							sql += " AND category LIKE ? AND length>=60 AND rating=? AND price=?";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+							stmt.setString(3, "%"+category+"%");
+							stmt.setString(4, rating);
+							stmt.setDouble(5, price);
+						} else {
+							sql += " AND length>=60 AND rating=? AND price=?";
+							stmt = conn.prepareStatement(sql);
+							stmt.setString(1, "%"+title+"%");
+							stmt.setString(2, "%"+actor+"%");
+							stmt.setString(3, rating);
+							stmt.setDouble(4, price);
+						}
+					}
+				}
 				rs = stmt.executeQuery();
-				if(rs.next()) {
-				row = rs.getInt("cnt");
+				while(rs.next()) {
+				row = (rs.getInt("cnt"));
 				}
 			} catch(SQLException e) {
 				e.printStackTrace();

@@ -29,6 +29,7 @@
 		<div class="mt-4 p-5 bg-dark text-white rounded">
 			<h1>film List View 검색</h1>
 		</div>
+		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/filmListView.jsp">뒤로</a>
 	<form action="<%=request.getContextPath()%>/view/filmSearchAction.jsp" method="post">
 		<table class="table table-hover" border = "2">
 			<tr>
@@ -98,17 +99,9 @@
 				</td>
 			</tr>
 		</table>
-
 	</form>
 	<!--  하단정보표시 -->
-		<div class="bg-secondary">
-		<div>상호명 : GooDee Academy</div>
-		<div>전화 : 02-2108-5900</div>
-		<div>팩스 : 02-2108-5909</div>
-		<div>사업자등록번호 : 457-85-00300</div>
-		<div>홈페이지 : <A href="https://www.gdu.co.kr">https://www.gdu.co.kr</A></div>
-		<div>주소 : 서울 금천구 가산디지털2로 115 대륭테크노타운 3차 1109호 71가산디지털단지역 5번 출구에서444m</div>
-	</div>
+	<jsp:include page="/inc/bottomMenu.jsp"></jsp:include>
 </div>
 </body>
 </html>

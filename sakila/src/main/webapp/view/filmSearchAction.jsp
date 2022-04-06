@@ -16,8 +16,10 @@
 	String title = request.getParameter("title");
 	String actor = request.getParameter("actor");
 	
-	int beginRow = 0;
-	int rowPerPage = 10;
+	// 페이지 설정 변수선언
+	int currentPage = 1;
+	int rowPerPage = 5;
+	int beginRow = (currentPage - 1) * rowPerPage;
 	
 	FilmDao filmDao = new FilmDao();
 	List<FilmList> list = filmDao.selectFilmListSearch(beginRow ,rowPerPage ,category, rating, price, length, title, actor);
@@ -25,7 +27,7 @@
 	
 	
 	//페이지 설정
-	int currentPage = 1;
+	
 	if(request.getParameter("currentPage") != null) { // 이전, 다음 링크를 통해서 들어왔다면
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
@@ -36,7 +38,7 @@
 	beginRow = (currentPage-1)*rowPerPage; // 현재페이지가 변경되면 beginRow도 변경된다. -> 가져오는 데이터 변경된다.
 	
 	// 전체 행의수
-	int totalCount = filmDao.selectFilmListSearchTotalRow();
+	int totalCount = filmDao.FilmListSearchTotalRow( category, rating, price, length, title, actor);
 	
 	// 마지막페이지 설정
 	int lastPage = 0;
@@ -85,25 +87,18 @@
 		<%
 			if(currentPage > 1) { // 현재페이지가 1이면 이전페이지가 존재해서는 안된다.
 		%>
-				<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/filmListView.jsp?currentPage=<%=currentPage-1%>">이전</a>&nbsp;&nbsp;&nbsp;
+				<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/filmListView.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">이전</a>&nbsp;&nbsp;&nbsp;
 		<%	
 			}
 			if(currentPage < lastPage) { // 마지막페이지가 있다면 
 		%>
-			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/filmListView.jsp?currentPage=<%=currentPage+1%>">다음</a>&nbsp;&nbsp;&nbsp;
+			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/filmListView.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">다음</a>&nbsp;&nbsp;&nbsp;
 		<%		
 			}
 		%>
 		</div>
 		<!--  하단정보표시 -->
-		<div class="bg-secondary">
-			<div>상호명 : GooDee Academy</div>
-			<div>전화 : 02-2108-5900</div>
-			<div>팩스 : 02-2108-5909</div>
-			<div>사업자등록번호 : 457-85-00300</div>
-			<div>홈페이지 : <A href="https://www.gdu.co.kr">https://www.gdu.co.kr</A></div>
-			<div>주소 : 서울 금천구 가산디지털2로 115 대륭테크노타운 3차 1109호 71가산디지털단지역 5번 출구에서444m</div>
-		</div>
+		<jsp:include page="/inc/bottomMenu.jsp"></jsp:include>
 </div>
 </body>
 </html>
