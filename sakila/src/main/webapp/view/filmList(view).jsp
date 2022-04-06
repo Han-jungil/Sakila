@@ -43,6 +43,7 @@
 		<div class="mt-4 p-5 bg-dark text-white rounded">
 			<h1>Film List(view)</h1>
 		</div>
+		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/filmSearchForm.jsp">조희</a>
 	<table class="table table-hover" border = "2">
 		<thead>
 			<th>FID</th>
