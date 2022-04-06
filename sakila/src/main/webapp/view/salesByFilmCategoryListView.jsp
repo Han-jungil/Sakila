@@ -65,12 +65,12 @@
 	<%
 		if(currentPage > 1) { // 현재페이지가 1이면 이전페이지가 존재해서는 안된다.
 	%>
-			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/salesByFilmCategoryList(view).jsp?currentPage=<%=currentPage-1%>">이전</a>&nbsp;&nbsp;&nbsp;
+			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/salesByFilmCategoryListView.jsp?currentPage=<%=currentPage-1%>">이전</a>&nbsp;&nbsp;&nbsp;
 	<%	
 		}
 		if(currentPage < lastPage) { // 마지막페이지가 있다면 
 	%>
-		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/salesByFilmCategoryList(view).jsp?currentPage=<%=currentPage+1%>">다음</a>&nbsp;&nbsp;&nbsp;
+		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/salesByFilmCategoryListView.jsp?currentPage=<%=currentPage+1%>">다음</a>&nbsp;&nbsp;&nbsp;
 	<%		
 		}
 	%>
