@@ -6,7 +6,33 @@ import java.util.*;
 import util.DBUtil;
 
 public class StoreDao {
-	
+	public List<Integer> selectStoreIdList() {
+		List<Integer> list = new ArrayList<>();
+		Connection conn = null;
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+	    conn = DBUtil.getConnection();
+	    String sql = "SELECT store_id storeId FROM store";
+	    try {
+	         stmt = conn.prepareStatement(sql);
+	         rs = stmt.executeQuery();
+	         while(rs.next()) {
+	        	Map<String, Object> map = new HashMap<String, Object>();	//다형성
+	        	list.add(rs.getInt("storeId"));
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	            rs.close();
+	            stmt.close();
+	            conn.close();
+	         } catch (SQLException e) {
+	            e.printStackTrace();
+	         }
+	      }
+		return list;
+	}
 	//selectStoreList
 	public List<Map<String, Object>> selectStoreList() {
 		// ArrayList는 List 인터페이스의 구현체 중 하나이다. 즉 부모다

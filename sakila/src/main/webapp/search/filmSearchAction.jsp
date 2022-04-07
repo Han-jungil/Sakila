@@ -87,12 +87,12 @@
 		<%
 			if(currentPage > 1) { // 현재페이지가 1이면 이전페이지가 존재해서는 안된다.
 		%>
-				<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/filmListView.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">이전</a>&nbsp;&nbsp;&nbsp;
+				<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/Search/filmSearchAction.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">이전</a>&nbsp;&nbsp;&nbsp;
 		<%	
 			}
 			if(currentPage < lastPage) { // 마지막페이지가 있다면 
 		%>
-			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/filmListView.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">다음</a>&nbsp;&nbsp;&nbsp;
+			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/Search/filmSearchAction.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">다음</a>&nbsp;&nbsp;&nbsp;
 		<%		
 			}
 		%>

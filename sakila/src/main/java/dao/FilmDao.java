@@ -312,7 +312,7 @@ public class FilmDao {
 	}
 	// filmSearchAction 총합 구하기 및 라스트 페이지 설정
 		public int FilmListSearchTotalRow(String category, String rating, double price, int length, String title, String actor) {
-			int row = -1;
+			int row = 0;
 			Connection conn = null;
 			PreparedStatement  stmt = null;
 			ResultSet rs = null;

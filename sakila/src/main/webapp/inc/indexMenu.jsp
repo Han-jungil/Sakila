@@ -20,3 +20,8 @@
 						<li><a href="<%=request.getContextPath()%>/procedure/filmNotInStockList.jsp">FilmNotInStockList</a></li>
 						<li><a href="<%=request.getContextPath()%>/procedure/rewardsReportList.jsp">RewardsReportList</a></li>
 					</ol>
+						<h4>-상세검색-</h4>
+					<ol>
+						<li><a href="<%=request.getContextPath()%>/Search/filmSearchForm.jsp">filmSearchForm</a></li>
+						<li><a href="<%=request.getContextPath()%>/Search/rentalSearchForm.jsp">rentalSearchForm</a></li>
+					</ol>
