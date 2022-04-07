@@ -30,7 +30,7 @@
 			<h1>film List View 검색</h1>
 		</div>
 		<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/view/filmListView.jsp">뒤로</a>
-	<form action="<%=request.getContextPath()%>/Search/filmSearchAction.jsp" method="post">
+	<form action="<%=request.getContextPath()%>/search/filmSearchAction.jsp" method="post">
 		<table class="table table-hover" border = "2">
 			<tr>
 				<td>카테고리</td>

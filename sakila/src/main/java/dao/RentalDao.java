@@ -146,8 +146,6 @@ public class RentalDao {
 			String sql = "";
 			try {
 				sql = "SELECT count(*) cnt FROM rental r INNER JOIN customer c	ON r.customer_id = c.customer_id INNER JOIN staff s ON r.staff_id = s.staff_id INNER JOIN inventory i ON r.inventory_id = i.inventory_id INNER JOIN film f ON i.film_id = f.film_id	WHERE CONCAT(c.first_name,' ',c.last_name) LIKE ?";
-				// 최소 날짜 SELECT MIN(rental_date) FROM rental; --> 2005-05-24
-				// 최대 날짜 SELECT MAX(rental_date) FROM rental; --> 2006-02-14
 				if(beginDate.equals("") && endDate.equals("")) {
 					if(storeId != -1) {
 						sql += " AND s.store_id = ? ";

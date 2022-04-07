@@ -21,9 +21,7 @@
 	int rowPerPage = 5;
 	int beginRow = (currentPage - 1) * rowPerPage;
 	
-	FilmDao filmDao = new FilmDao();
-	List<FilmList> list = filmDao.selectFilmListSearch(beginRow ,rowPerPage ,category, rating, price, length, title, actor);
-	System.out.println(list.size()); // 0
+
 	
 	
 	//페이지 설정
@@ -36,6 +34,10 @@
 	// 페이지 바뀌면 끝이 아니고, 가지고 오는 데이터가 변경되어야 한다.
 	rowPerPage = 5;
 	beginRow = (currentPage-1)*rowPerPage; // 현재페이지가 변경되면 beginRow도 변경된다. -> 가져오는 데이터 변경된다.
+	
+	FilmDao filmDao = new FilmDao();
+	List<FilmList> list = filmDao.selectFilmListSearch(beginRow ,rowPerPage ,category, rating, price, length, title, actor);
+	System.out.println(list.size()); // 0
 	
 	// 전체 행의수
 	int totalCount = filmDao.FilmListSearchTotalRow( category, rating, price, length, title, actor);
@@ -87,12 +89,12 @@
 		<%
 			if(currentPage > 1) { // 현재페이지가 1이면 이전페이지가 존재해서는 안된다.
 		%>
-				<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/Search/filmSearchAction.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">이전</a>&nbsp;&nbsp;&nbsp;
+				<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/search/filmSearchAction.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">이전</a>&nbsp;&nbsp;&nbsp;
 		<%	
 			}
 			if(currentPage < lastPage) { // 마지막페이지가 있다면 
 		%>
-			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/Search/filmSearchAction.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">다음</a>&nbsp;&nbsp;&nbsp;
+			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/search/filmSearchAction.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">다음</a>&nbsp;&nbsp;&nbsp;
 		<%		
 			}
 		%>

@@ -17,8 +17,7 @@
 	int beginRow = (currentPage - 1) * rowPerPage;
 	
 	//
-	RentalDao rentalDao = new RentalDao();
-	List<Map<String, Object>> list = rentalDao.selectRentalSearchList(beginRow, rowPerPage, storeId, customerName, beginDate, endDate);
+	
 	
 	//페이지 설정
 	if(request.getParameter("currentPage") != null) { // 이전, 다음 링크를 통해서 들어왔다면
@@ -29,6 +28,9 @@
 	// 페이지 바뀌면 끝이 아니고, 가지고 오는 데이터가 변경되어야 한다.
 	rowPerPage = 5;
 	beginRow = (currentPage-1)*rowPerPage; // 현재페이지가 변경되면 beginRow도 변경된다. -> 가져오는 데이터 변경된다.
+	
+	RentalDao rentalDao = new RentalDao();
+	List<Map<String, Object>> list = rentalDao.selectRentalSearchList(beginRow, rowPerPage, storeId, customerName, beginDate, endDate);
 	
 	// 전체 행의수
 	int totalCount = rentalDao.rentalSearchTotalRow(storeId, customerName, beginDate, endDate);
@@ -95,12 +97,12 @@
 		<%
 			if(currentPage > 1) { // 현재페이지가 1이면 이전페이지가 존재해서는 안된다.
 		%>
-				<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/Search/rentalSearchAction.jsp?currentPage=<%=currentPage-1%>&storeId=<%=storeId%>&customerName=<%=customerName%>&beginDate=<%=beginDate%>&endDate=<%=endDate%>" class="btn btn-primary">이전</a>
+				<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/search/rentalSearchAction.jsp?currentPage=<%=currentPage-1%>&storeId=<%=storeId%>&customerName=<%=customerName%>&beginDate=<%=beginDate%>&endDate=<%=endDate%>" class="btn btn-primary">이전</a>
 		<%	
 			}
 			if(currentPage < lastPage) { // 마지막페이지가 있다면 
 		%>
-			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/Search/rentalSearchAction.jsp?currentPage=<%=currentPage+1%>&storeId=<%=storeId%>&customerName=<%=customerName%>&beginDate=<%=beginDate%>&endDate=<%=endDate%>" class="btn btn-primary">다음</a>
+			<a class="btn bg-dark text-white" href="<%=request.getContextPath()%>/search/rentalSearchAction.jsp?currentPage=<%=currentPage+1%>&storeId=<%=storeId%>&customerName=<%=customerName%>&beginDate=<%=beginDate%>&endDate=<%=endDate%>" class="btn btn-primary">다음</a>
 		<%		
 			}
 		%>

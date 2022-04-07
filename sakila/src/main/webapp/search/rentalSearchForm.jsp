@@ -26,7 +26,7 @@
 		<div class="mt-4 p-5 bg-dark text-white rounded">
 			<h1>rental 검색</h1>
 		</div>
-	<form action="<%=request.getContextPath()%>/Search/rentalSearchAction.jsp" method="post">
+	<form action="<%=request.getContextPath()%>/search/rentalSearchAction.jsp" method="post">
 		<table class="table table-hover" border = "2">
 			<!--  가게아이디 검색 -->
 			<tr>
