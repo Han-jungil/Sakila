@@ -24,4 +24,5 @@
 					<ol>
 						<li><a href="<%=request.getContextPath()%>/search/filmSearchForm.jsp">filmSearchForm</a></li>
 						<li><a href="<%=request.getContextPath()%>/search/rentalSearchForm.jsp">rentalSearchForm</a></li>
+						<li><a href="<%=request.getContextPath()%>/search/statsData.jsp">statsData</a></li>
 					</ol>
