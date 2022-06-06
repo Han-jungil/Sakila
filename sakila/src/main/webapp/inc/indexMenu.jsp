@@ -6,13 +6,13 @@
 					</ol>
 						<h4>-View-</h4>
 					<ol>	
-						<li><a href="<%=request.getContextPath()%>/view/actorInfoList(view).jsp">ActorInfo List(View)</a></li>
-						<li><a href="<%=request.getContextPath()%>/view/customerList(view).jsp">Customer List(View)</a></li>
-						<li><a href="<%=request.getContextPath()%>/view/filmList(view).jsp">Film List(View)</a></li>
-						<li><a href="<%=request.getContextPath()%>/view/niceButSlowerFilmList(view).jsp">NicerButSlowerFilm List(View)</a></li>
-						<li><a href="<%=request.getContextPath()%>/view/salesByFilmCategoryList(view).jsp">SalesByFilmCategory List(View)</a></li>
-						<li><a href="<%=request.getContextPath()%>/view/salesByStoreList(view).jsp">SalesByStore List(View)</a></li>
-						<li><a href="<%=request.getContextPath()%>/view/staffListViewList(view).jsp">Staff List(View)</a></li>
+						<li><a href="<%=request.getContextPath()%>/view/actorInfoListView.jsp">ActorInfo List(View)</a></li>
+						<li><a href="<%=request.getContextPath()%>/view/customerListView.jsp">Customer List(View)</a></li>
+						<li><a href="<%=request.getContextPath()%>/view/filmListView.jsp">Film List(View)</a></li>
+						<li><a href="<%=request.getContextPath()%>/view/niceButSlowerFilmListView.jsp">NicerButSlowerFilm List(View)</a></li>
+						<li><a href="<%=request.getContextPath()%>/view/salesByFilmCategoryListView.jsp">SalesByFilmCategory List(View)</a></li>
+						<li><a href="<%=request.getContextPath()%>/view/salesByStoreListView.jsp">SalesByStore List(View)</a></li>
+						<li><a href="<%=request.getContextPath()%>/view/staffListViewListView.jsp">Staff List(View)</a></li>
 					</ol>
 						<h4>-Procedure-</h4>
 					<ol>
