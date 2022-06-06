@@ -6,7 +6,7 @@ import vo.*;
 import util.DBUtil;
 
 public class RewardsReportDao {
-	public Map<String, Object> rewardsReportCall(int minMonthlyPurchases,double minDollarAmountPurchased) {
+	public Map<String, Object> rewardsReportCall(int minMonthlyPurchases, int minDollarAmountPurchased) {
 		// 자원준비
 		Map<String, Object> map = new HashMap<String, Object>();
 		Connection conn = null;
@@ -43,25 +43,9 @@ public class RewardsReportDao {
 			count = stmt.getInt(3); // 프로시저 3번째 out변수 값
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {	// 자원 반납
-				rs.close(); stmt.close(); conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
-		map.put("customer", list);
+		map.put("list", list);
 		map.put("count", count);
-		return map;	// 값 리턴
-	}
-	// test
-	public static void main(String[] args) {
-		RewardsReportDao rR = new RewardsReportDao();
-		int minMonthlyPurchases = 5;
-		double minDollarAmountPurchased = 10.0;
-		Map<String, Object> map = rR.rewardsReportCall(minMonthlyPurchases, minDollarAmountPurchased);
-		List<Integer> list = (List<Integer>)map.get("list");
-		int count = (Integer)map.get("count");
-		System.out.println(minMonthlyPurchases + "번 사신 손님들의 "+ minDollarAmountPurchased +"금액보다 산게"+count+"번 정도 있음");
+		return map;
 	}
 }

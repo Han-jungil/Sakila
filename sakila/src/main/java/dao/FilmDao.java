@@ -299,7 +299,7 @@ public class FilmDao {
 			while(rs.next()) {
 				list.add(rs.getDouble("price"));
 			}
-		} catch(SQLException e) {
+		} catch(Exception e) {
 			e.printStackTrace(); // 예외된 애들 꼭 찝어달라
 		}finally {
 			try {	// 자원반납
@@ -516,7 +516,7 @@ public class FilmDao {
 				while(rs.next()) {
 				row = (rs.getInt("cnt"));
 				}
-			} catch(SQLException e) {
+			} catch(Exception e) {
 				e.printStackTrace();
 				System.out.println("예외발생");
 			}finally {
@@ -554,14 +554,8 @@ public class FilmDao {
 				list.add(rs.getInt(1)); // rs.getInt("inventory_id")
 			}
 			count = stmt.getInt(3); // 프로시저 3번째 out변수 값
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {	// 자원 반납
-				rs.close(); stmt.close(); conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		map.put("list", list);
 		map.put("count", count);

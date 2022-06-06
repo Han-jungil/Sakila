@@ -13,7 +13,7 @@ public class StaffListViewDao {
 		PreparedStatement  stmt = null;
 		ResultSet rs = null;
 		conn = DBUtil.getConnection(); 		// getConnection을 static으로 썼기때문에 객체없이 사용이 가능하다.
-		String sql = "SELECT ID, name, address, zip_code zipCode, phone, city, country, SID sid  FROM staff_list ORDER BY ID LIMIT ?, ?";
+		String sql = "SELECT ID, name, address, phone, city, country, SID sid  FROM staff_list ORDER BY ID LIMIT ?, ?";
 		ArrayList<StaffListView> list = new ArrayList<StaffListView>();		//다형성
 		try {
 			stmt = conn.prepareStatement(sql);
@@ -28,7 +28,6 @@ public class StaffListViewDao {
 				s.setId(rs.getInt("ID"));
 				s.setName(rs.getString("name"));
 				s.setAddress(rs.getString("address"));
-				s.setZipCode(rs.getString("zipCode"));
 				s.setPhone(rs.getLong("phone"));
 				s.setCity(rs.getString("city"));
 				s.setCountry(rs.getString("country"));
@@ -36,12 +35,14 @@ public class StaffListViewDao {
 				list.add(s);
 			}
 			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("예외발생");
 		} finally {
 			try {
-				rs.close(); stmt.close(); conn.close();
+				rs.close(); 
+				stmt.close(); 
+				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -65,7 +66,7 @@ public class StaffListViewDao {
 			if(rs.next()) {
 			row = rs.getInt("cnt");
 			}
-		} catch(SQLException e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("예외발생");
 		}finally {

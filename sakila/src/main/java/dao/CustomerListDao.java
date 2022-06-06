@@ -12,7 +12,7 @@ public class CustomerListDao {
 		PreparedStatement  stmt = null;
 		ResultSet rs = null;
 		conn = DBUtil.getConnection(); 		// getConnection을 static으로 썼기때문에 객체없이 사용이 가능하다.
-		String sql = "SELECT ID customerListId, name name, address, zip_code zipCode, phone, city, country, notes, SID sid  FROM customer_list ORDER BY ID LIMIT ?, ?";
+		String sql = "SELECT ID customerListId, name name, address, phone, city, country, notes, SID sid  FROM customer_list ORDER BY ID LIMIT ?, ?";
 		ArrayList<CustomerList> list = new ArrayList<CustomerList>();		//다형성
 		try {
 			stmt = conn.prepareStatement(sql);
@@ -27,7 +27,6 @@ public class CustomerListDao {
 				c.setCostomerListId(rs.getInt("customerListId"));
 				c.setName(rs.getString("Name"));
 				c.setAddress(rs.getString("address"));
-				c.setZipCode(rs.getString("zipCode"));
 				c.setPhone(rs.getLong("phone"));
 				c.setCity(rs.getString("city"));
 				c.setCountry(rs.getString("city"));
@@ -35,7 +34,7 @@ public class CustomerListDao {
 				c.setSid(rs.getString("sid"));
 				list.add(c);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("예외발생");
 		} finally {
@@ -64,7 +63,7 @@ public class CustomerListDao {
 			if(rs.next()) {
 			row = rs.getInt("cnt");
 			}
-		} catch(SQLException e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("예외발생");
 		}finally {

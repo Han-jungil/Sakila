@@ -4,25 +4,28 @@
 <%@ page import="dao.*" %>
 <%
 	// 변수 선언
-	int minMonthlyPurchases = 1;
-	double minDollarAmountPurchased = 1;
+	int minMonthlyPurchases = 0;
+	int minDollarAmuntPurchased =0; 
 	int count = 0;
 	
 	// 요청값
-	if((request.getParameter("minMonthlyPurchases")!=null && request.getParameter("minMonthlyPurchases")!="") && (request.getParameter("minDollarAmountPurchased")!=null && request.getParameter("minDollarAmountPurchased")!="")){
+	if(request.getParameter("minMonthlyPurchases")!=null&&!request.getParameter("minMonthlyPurchases").equals("")){
 		minMonthlyPurchases = Integer.parseInt(request.getParameter("minMonthlyPurchases"));
 		System.out.println(minMonthlyPurchases+"<--minMonthlyPurchases");
-		minDollarAmountPurchased = Double.parseDouble(request.getParameter("minDollarAmountPurchased"));
-		System.out.println(minDollarAmountPurchased+"<--minDollarAmountPurchased");
+	}
+
+	if(request.getParameter("minDollarAmuntPurchased")!=null&&!request.getParameter("minDollarAmuntPurchased").equals("")){
+		minDollarAmuntPurchased = Integer.parseInt(request.getParameter("minDollarAmuntPurchased"));
+		System.out.println(minDollarAmuntPurchased+"<--minDollarAmuntPurchased");
 	}
 
 	// 비지니스 로기직(모델계층)
 	RewardsReportDao rewardsReportDao = new RewardsReportDao();
-	Map<String,Object> map = rewardsReportDao.rewardsReportCall(minMonthlyPurchases, minDollarAmountPurchased);
+	Map<String,Object> rewardsReport = rewardsReportDao.rewardsReportCall(minMonthlyPurchases, minDollarAmuntPurchased);
 	
 	// 카운터
-	count = (Integer)map.get("count");
-	List<Customer> list = (List<Customer>)map.get("customer");
+	count = (Integer)rewardsReport.get("count");
+	List<Customer> customerList = (List<Customer>)rewardsReport.get("customer");
 	
 %>
 <!DOCTYPE html>
@@ -56,6 +59,9 @@
 		</tr>
 		</table>
 	</form>
+	<%
+	if(minMonthlyPurchases!=0 && minDollarAmuntPurchased != 0.0 ){
+	%>
 	<table class="table table-hover col-sm-11">
 		<thead>
 			<th>customerId</th>
@@ -68,14 +74,15 @@
 			<th>lastupDate</th>
 		</thead>
 		<tbody>
-		<h5><%=minMonthlyPurchases%>번 사신 손님들의 <%=minDollarAmountPurchased%>금액보다 산게 <%=count%>번 정도 있음</h5>
+		<h5><%=minMonthlyPurchases%>번 사신 손님들의 <%=minDollarAmuntPurchased%>금액보다 산게 <%=count%>번 정도 있음</h5>
 		<%
-			for(Customer c : list) {
+			for(Customer c : customerList) {
 		%>
 			<tr>
 				<td><%=c.getCustomerId()%></td>
 				<td><%=c.getStoreId()%></td>
-				<td><%=c.getFirstName()%> <%=c.getLastName()%></td>
+				<td><%=c.getFirstName()%></td>
+				<td><%=c.getLastName()%></td>
 				<td><%=c.getEmail()%></td>
 				<td><%=c.getAddressId()%></td>
 				<td><%=c.getActive()%></td>
@@ -84,6 +91,7 @@
 			</tr>
 		<%
 			}
+	}
 		%>
 		</tbody>
 	</table>

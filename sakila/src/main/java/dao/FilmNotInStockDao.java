@@ -40,12 +40,6 @@ public class FilmNotInStockDao {
 			count = stmt.getInt(3); // 프로시저 3번째 out변수 값
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {	// 자원 반납
-				rs.close(); stmt.close(); conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		map.put("list", list);
 		map.put("count", count);

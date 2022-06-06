@@ -48,7 +48,6 @@
 			<th>ID</th>
 			<th>name</th>
 			<th>address</th>
-			<th>zipCode</th>
 			<th>phone</th>
 			<th>city</th>
 			<th>country</th>
@@ -63,7 +62,6 @@
 					 <td><%=a.getCostomerListId()%></td>
 					 <td><%=a.getName()%></td>
 					 <td><%=a.getAddress()%></td>
-					 <td><%=a.getZipCode()%></td>
 					 <td><%=a.getPhone()%></td>
 					 <td><%=a.getCity()%></td>
 					 <td><%=a.getCountry()%></td>

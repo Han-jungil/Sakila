@@ -31,7 +31,7 @@ public class ActorInfoDao {
 				list.add(a);
 			}
 			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("예외발생");
 		} finally {
@@ -52,7 +52,7 @@ public class ActorInfoDao {
 		PreparedStatement  stmt = null;
 		ResultSet rs = null;
 		conn = DBUtil.getConnection();
-		String sql = "SELECT COUNT(*) cnt FROM Actor_Info";
+		String sql = "SELECT COUNT(*) cnt FROM actor_info";
 		try {
 			stmt = conn.prepareStatement(sql);
 			System.out.println("sql selectActoInfoTotalRow : " + stmt);	//디버깅
@@ -60,12 +60,14 @@ public class ActorInfoDao {
 			if(rs.next()) {
 			row = rs.getInt("cnt");
 			}
-		} catch(SQLException e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("예외발생");
 		}finally {
 			try {
-				rs.close(); stmt.close(); conn.close();
+				rs.close(); 
+				stmt.close(); 
+				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
